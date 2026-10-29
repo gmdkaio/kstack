@@ -1,0 +1,13 @@
+{
+  "name": "kstack",
+  "owner": {
+    "name": "kaio"
+  },
+  "plugins": [
+    {
+      "name": "kstack",
+      "source": "./",
+      "description": "A small workflow stack for Claude Code: one entry skill, commit, close-out, setup and a few principles."
+    }
+  ]
+}

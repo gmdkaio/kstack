@@ -1,0 +1,24 @@
+{
+  "name": "kstack",
+  "version": "0.1.0",
+  "description": "A small workflow stack for Claude Code: one entry skill, commit, close-out, setup and a few principles.",
+  "author": {
+    "name": "kaio",
+    "url": "https://github.com/gmdkaio"
+  },
+  "repository": "https://github.com/gmdkaio/kstack",
+  "keywords": ["workflow", "skills", "commit", "handoff"],
+  "skills": [
+    "./skills/brain",
+    "./skills/commit",
+    "./skills/close",
+    "./skills/setup",
+    "./skills/blindspots",
+    "./skills/principle-honest",
+    "./skills/principle-lean",
+    "./skills/principle-prove-it",
+    "./skills/principle-outward-actions",
+    "./skills/principle-prose",
+    "./skills/principle-delegate"
+  ]
+}
