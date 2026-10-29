@@ -16,4 +16,4 @@ A small workflow stack for Claude Code, inspired by the architecture of Lauren T
 
 Then ask for `setup` in the project.
 
-Layers: this repo is the generic core. Rules for an organization or a client live in local files outside it. A project keeps its own state in its docs folder.
+The permission rules ask before `git commit`, `git push` and `gh pr`. They match the command text, so a variant such as `git -C . commit` is not caught. They are a guardrail, not a block.

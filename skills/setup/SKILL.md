@@ -7,7 +7,7 @@ description: One-time setup of a project for kstack. Writes the permission rules
 
 a plugin can't set permissions, so this does it once per project. ask before overwriting anything that exists.
 
-1. **settings.** merge `templates/settings.json` into `.claude/settings.json`. it asks before `git commit`, `git push` and `gh pr`, and blanks the commit and PR attribution. show the merged result before writing. add `"env": {"KSTACK_HOOK": "off"}` only if the user wants the session hook off.
+1. **settings.** merge `templates/settings.json` into `.claude/settings.json`. it asks before `git commit`, `git push` and `gh pr`, and blanks the commit and PR attribution. the ask rules match the command text, so a variant like `git -C . commit` is not caught: tell the user it is a guardrail, not a block. show the merged result before writing. add `"env": {"KSTACK_HOOK": "off"}` only if the user wants the session hook off.
 2. **docs.** create the folder from `templates/docs/` (`handoff.md`, `log.md`, `decisoes/`). the default is `docs/` in the repo.
 3. **pointer.** add to the project `CLAUDE.md`, or create it, the lines from `templates/CLAUDE.md`: where the docs are and the commit style. never overwrite existing text.
 4. report what was written.
