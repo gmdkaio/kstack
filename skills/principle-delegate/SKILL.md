@@ -10,10 +10,18 @@ delegate when pieces are independent, when the work would flood your context, or
 
 ## roles
 
-- **explorer**: read only, answers "how does this work". cheap model, low effort.
-- **builder**: implements one bounded piece.
-- **reviewer**: a fresh agent that tries to break the change. a finding counts only if you rerun its command and it fails. it reports and applies no fixes.
-- **writer**: handoff and docs.
+- **explorer**: read only, answers "how does this work". use the built-in `Explore` agent.
+- **builder**: implements one bounded piece. use `general-purpose` with a brief.
+- **reviewer**: `kstack:reviewer`, a fresh agent. see below.
+- **writer**: handoff and docs. `general-purpose` with a brief.
+
+## the reviewer
+
+it reviews the final work of a commit, once, and only when needed: a new feature, a change to a shared signature, or when the user asks. a small fix that passes its checks does not get one.
+
+give it the diff and the claim the change makes, not the builder's reasoning. it reports and applies no fixes. you rerun every finding:
+- a bug counts only if its reproduction fails.
+- an excess finding counts only if deleting the thing leaves the checks passing.
 
 ## rules for every spawn
 
@@ -26,8 +34,12 @@ delegate when pieces are independent, when the work would flood your context, or
 
 ## models
 
-the sheet at `~/.claude/kstack-models.md` has one line per role, for example `reviewer: opus @high`. no sheet, use the session model.
+the sheet at `~/.claude/kstack-models.md` has one line per role, `role: model @effort`. when you spawn, read it and pass `model` and `effort` on the call. the agent files carry no model. no sheet or no line for the role, use the session model. `setup` offers the template if the sheet is missing.
 
 ## escalation
 
-a role goes up one step (next model, or higher effort on the same one) when its check fails twice, or when the reviewer finds something the builder can't fix in one retry. the ladder is haiku, sonnet, opus. fable is never on it unless the user asks for it. one escalation per task. if it still fails, stop and ask the user.
+a role goes up one step (higher effort on the same model, then the next model) when its check fails twice, or when the reviewer finds something the builder can't fix in one retry. the ladder is haiku, sonnet, opus. fable is never on it unless the user asks for it. one escalation per task. if it still fails, stop and ask the user.
+
+## a judgment call
+
+rare. use it only when two reasonable options remain after the evidence is in, such as a design tradeoff where two reviewers disagree. name the agents so they can message each other with `SendMessage`, state the question and the options in each brief, and cap it at two rounds. then read the exchange and decide yourself. agreement between agents is evidence, not authority. record a decision that matters in `decisoes/`.
