@@ -9,7 +9,7 @@ writer: sonnet @low
 
 # notes
 # - builder: use high for a harder or longer piece.
-# - reviewer: use high for a new feature or a shared signature change. avoid max.
+# - reviewer: keep opus. its value is the reasoning in its feedback. use high for a new feature or a shared signature change. avoid max.
 # - avoid xhigh and max on builder and explorer. sonnet at max starts its own review rounds.
 # - haiku at low skips searches and checks in long prompts.
 # - CLAUDE_CODE_EFFORT_LEVEL in the environment overrides every effort here.

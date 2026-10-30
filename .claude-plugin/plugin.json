@@ -1,6 +1,6 @@
 {
   "name": "kstack",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "A small workflow stack for Claude Code: one entry skill, commit, close-out, setup and a few principles.",
   "author": {
     "name": "kaio",

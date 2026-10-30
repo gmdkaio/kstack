@@ -19,9 +19,12 @@ delegate when pieces are independent, when the work would flood your context, or
 
 it reviews the final work of a commit, once, and only when needed: a new feature, a change to a shared signature, or when the user asks. a small fix that passes its checks does not get one.
 
-give it the diff and the claim the change makes, not the builder's reasoning. it reports and applies no fixes. you rerun every finding:
+give it the diff and the claim the change makes, not the builder's reasoning. it reports and applies no fixes. its value is the reasoning in its feedback more than a bug count, so it runs on opus. you rerun every finding:
 - a bug counts only if its reproduction fails.
 - an excess finding counts only if deleting the thing leaves the checks passing.
+- feedback has no command. weigh the reasoning.
+
+then the report goes back to the builder to work on. a fresh builder with the report in its brief, or `SendMessage` to the original if it is still alive. the builder takes each point or declines it with a reason, reruns the checks, and reports what changed. one round. a second only when a bug was real.
 
 ## rules for every spawn
 
