@@ -10,7 +10,8 @@ nothing leaves the machine without the user saying so. the permission rules in `
 1. `git status` and `git diff`. split the changes by concern. one commit per concern.
 2. leave out files the project `CLAUDE.md` says belong to the user, and anything unrelated to the task. list what each commit will contain.
 3. write each message in the project's style. read it from the `commits:` rules in the project `CLAUDE.md`. with no rule: lowercase, short, say what changed, no trailers.
-4. ask which action to take, one question: commit only, commit and push, commit and push and open a PR, commit and push and merge. the user can name something else.
-5. do exactly that, then report the hashes.
+4. **state.** if the project `CLAUDE.md` has a `docs:` line, keep the state current at this boundary: add one dated line per commit to `log.md` (newest last), and rewrite the state and next sections of `handoff.md`. if the docs are in the repo, the change goes in the commit it describes. if they live outside the repo, write them there and commit nothing for them. no `docs:` line, or `kstack:close` just wrote them, skip this step.
+5. ask which action to take, one question: commit only, commit and push, commit and push and open a PR, commit and push and merge. the user can name something else.
+6. do exactly that, then report the hashes.
 
 never force push. never skip hooks. a failed hook is fixed, not bypassed.
