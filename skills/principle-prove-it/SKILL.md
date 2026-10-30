@@ -9,6 +9,7 @@ user-invocable: false
 - check the real thing, not a proxy. "it compiles" is not a check. run the tests, hit the page, diff the output, render the screen.
 - a bug fix is proven when the reproduction that failed now passes.
 - label every claim: **measured** (I ran it and saw it), **inferred** (it follows from what I read), **guess** (I don't know). say which.
+- before trusting a measured number, name the decision it would change. a surprising result gets "why that much?" first: an error, cached or skipped work, noise, one side not tuned. keep the run count and the spread with the number.
 - report failures as they are. a failing test is said with its output. a skipped step is said as skipped.
 - when something is done and verified, say it plainly, no hedging.
 - a subagent's report is a lead, not proof. check it yourself before repeating it.
