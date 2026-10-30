@@ -14,6 +14,8 @@
     "./skills/close",
     "./skills/setup",
     "./skills/blindspots",
+    "./skills/verify-create",
+    "./skills/verify-maintain",
     "./skills/principle-honest",
     "./skills/principle-lean",
     "./skills/principle-prove-it",
