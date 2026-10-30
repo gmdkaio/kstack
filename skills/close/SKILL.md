@@ -12,6 +12,6 @@ the project's `CLAUDE.md` has a `docs:` line with the folder (a `docs/` in the r
 3. **log.md**: one dated line per change, newest last.
 4. **decisoes/**: only when a choice was made. one file `YYYY-MM-DD-slug.md` with what was decided, the options left out and why.
 5. **prose.** run the humanizer on anything written for people, following `kstack:principle-prose`.
-6. **memory.** if a saved memory is really a rule (a thing to always or never do), propose moving it to the project `CLAUDE.md` or a settings rule. the user confirms.
+6. **memory.** if a saved memory is really a rule (a thing to always or never do), propose moving it to the strongest place that holds: a settings rule or hook first, then a lint or test, then the project `CLAUDE.md`. prose is the last resort. the user confirms.
 7. **extras.** list what was added beyond the request (files, options, tests). delete what isn't needed.
 8. run `kstack:commit`.
