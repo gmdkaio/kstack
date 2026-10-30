@@ -7,6 +7,7 @@ A small workflow stack for Claude Code, inspired by the architecture of Lauren T
 - `close`: updates handoff, log and decisions, humanizes the prose, then commits.
 - `setup`: once per project. Permission rules, docs skeleton, CLAUDE.md pointer.
 - `blindspots`: what an expert in the task would ask, what scope is missing, what they would notice first.
+- `verify-create`, `verify-maintain`: build a project's own verify skill that drives the real app in a browser (two widths, console and network errors, empty and error states, keyboard basics), with a feature map, and keep it honest. Needs a browser driver such as Playwright.
 - `reviewer`: an agent that reviews one finished commit, only for a new feature or a shared signature change. It reports and applies no fixes.
 - principles: honest, lean, prove-it, outward-actions, prose, delegate.
 

@@ -7,6 +7,7 @@ user-invocable: false
 # prove it
 
 - check the real thing, not a proxy. "it compiles" is not a check. run the tests, hit the page, diff the output, render the screen.
+- UI work is checked in a real browser, not read from the code. use the project's `verify-<app>` skill. none yet: run `kstack:verify-create`.
 - a bug fix is proven when the reproduction that failed now passes.
 - label every claim: **measured** (I ran it and saw it), **inferred** (it follows from what I read), **guess** (I don't know). say which.
 - before trusting a measured number, name the decision it would change. a surprising result gets "why that much?" first: an error, cached or skipped work, noise, one side not tuned. keep the run count and the spread with the number.
