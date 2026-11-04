@@ -1,6 +1,6 @@
 {
   "name": "kstack",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "A small workflow stack for Claude Code: one entry skill, commit, close-out, setup and a few principles.",
   "author": {
     "name": "kaio",
@@ -14,6 +14,7 @@
     "./skills/close",
     "./skills/setup",
     "./skills/blindspots",
+    "./skills/shape",
     "./skills/verify-create",
     "./skills/verify-maintain",
     "./skills/principle-honest",
