@@ -4,7 +4,7 @@ A small workflow stack for Claude Code, inspired by the architecture of Lauren T
 
 - `brain`: the entry skill. A session hook points at it for work that is more than a small edit.
 - `commit`: groups changes, writes messages in the project's style, asks what to do with them.
-- `close`: updates handoff, log and decisions, humanizes the prose, then commits.
+- `close`: updates handoff, log and decisions, checks the repo's status topic, humanizes the prose, then commits.
 - `setup`: once per project. Permission rules, docs skeleton, CLAUDE.md pointer.
 - `blindspots`: what an expert in the task would ask, what scope is missing, what they would notice first.
 - `shape`: for a new project or a rough idea. Interviews you in rounds with a recommended answer for each question, settles scope and stack, writes a one-page `design.md` and builds nothing until you approve it. Inspired by superpowers' brainstorming and the grill-me skills.
