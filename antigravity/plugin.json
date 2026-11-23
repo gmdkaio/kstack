@@ -1,7 +1,7 @@
 {
   "name": "kstack",
   "displayName": "kstack",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "A small workflow stack: entry routing, shaping, blindspots, verification, review, commit, close-out, and core principles.",
   "logo": "assets/icon.png",
   "author": {

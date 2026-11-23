@@ -65,48 +65,71 @@ function buildAntigravityReviewer(sourcePath) {
   ].join('\n');
 }
 
-// Recreate plugin directory cleanly so removed files do not linger.
-fs.rmSync(targetDir, { recursive: true, force: true });
-fs.mkdirSync(targetDir, { recursive: true });
+function installPlugin(dir) {
+  // Recreate plugin directory cleanly so removed files do not linger.
+  fs.rmSync(dir, { recursive: true, force: true });
+  fs.mkdirSync(dir, { recursive: true });
 
-// 1. Copy Antigravity manifest, rules, and templates.
-copyDir(agySource, targetDir);
+  // 1. Copy Antigravity manifest, rules, and templates.
+  copyDir(agySource, dir);
 
-// 2. Copy shared icon.
-const iconSrc = path.join(repoRoot, '.claude-plugin', 'icon.png');
-if (fs.existsSync(iconSrc)) {
-  fs.mkdirSync(path.join(targetDir, 'assets'), { recursive: true });
-  fs.copyFileSync(iconSrc, path.join(targetDir, 'assets', 'icon.png'));
+  // 2. Copy shared icon.
+  const iconSrc = path.join(repoRoot, '.claude-plugin', 'icon.png');
+  if (fs.existsSync(iconSrc)) {
+    fs.mkdirSync(path.join(dir, 'assets'), { recursive: true });
+    fs.copyFileSync(iconSrc, path.join(dir, 'assets', 'icon.png'));
+  }
+
+  // 3. Copy shared skills (excluding the 5 principles folded into rules/AGENTS.md).
+  const skillsSrc = path.join(repoRoot, 'skills');
+  const skillsDest = path.join(dir, 'skills');
+  fs.mkdirSync(skillsDest, { recursive: true });
+  for (const entry of fs.readdirSync(skillsSrc, { withFileTypes: true })) {
+    if (!entry.isDirectory()) continue;
+    if (FOLDED_PRINCIPLES.has(entry.name)) continue;
+    copyDir(path.join(skillsSrc, entry.name), path.join(skillsDest, entry.name));
+  }
+
+  // 4. Generate Antigravity reviewer agent from the single-source prompt body.
+  const agentsDest = path.join(dir, 'agents');
+  fs.mkdirSync(agentsDest, { recursive: true });
+  fs.writeFileSync(
+    path.join(agentsDest, 'reviewer.md'),
+    buildAntigravityReviewer(path.join(repoRoot, 'agents', 'reviewer.md')),
+    'utf8',
+  );
+
+  console.log(`Installed Antigravity plugin to ${dir}`);
 }
 
-// 3. Copy shared skills (excluding the 5 principles folded into rules/AGENTS.md).
-const skillsSrc = path.join(repoRoot, 'skills');
-const skillsDest = path.join(targetDir, 'skills');
-fs.mkdirSync(skillsDest, { recursive: true });
-for (const entry of fs.readdirSync(skillsSrc, { withFileTypes: true })) {
-  if (!entry.isDirectory()) continue;
-  if (FOLDED_PRINCIPLES.has(entry.name)) continue;
-  copyDir(path.join(skillsSrc, entry.name), path.join(skillsDest, entry.name));
-}
+installPlugin(targetDir);
 
-// 4. Generate Antigravity reviewer agent from the single-source prompt body.
-const reviewerSrc = path.join(repoRoot, 'agents', 'reviewer.md');
-const agentsDest = path.join(targetDir, 'agents');
-fs.mkdirSync(agentsDest, { recursive: true });
-fs.writeFileSync(
-  path.join(agentsDest, 'reviewer.md'),
-  buildAntigravityReviewer(reviewerSrc),
-  'utf8',
-);
-
-// 5. Copy default models sheet to ~/.gemini/config/kstack-models.md if absent (only for default install).
 if (!process.argv[2]) {
+  // 5. Copy default models sheet to ~/.gemini/config/kstack-models.md if absent.
   const modelsDest = path.join(os.homedir(), '.gemini', 'config', 'kstack-models.md');
   if (!fs.existsSync(modelsDest)) {
     fs.mkdirSync(path.dirname(modelsDest), { recursive: true });
     fs.copyFileSync(path.join(agySource, 'templates', 'kstack-models.md'), modelsDest);
     console.log(`Created ${modelsDest}`);
   }
-}
 
-console.log(`Installed Antigravity plugin to ${targetDir}`);
+  // 6. T3 Code runs its own Antigravity with a separate home per install. It copies
+  // ~/.gemini/GEMINI.md there but not plugins, and has no Customizations page, so
+  // install, enable, and copy the models sheet into each home directly.
+  const t3Root = path.join(os.homedir(), '.t3', 'userdata', 'providers', 'antigravity');
+  const t3Homes = fs.existsSync(t3Root)
+    ? fs.readdirSync(t3Root, { withFileTypes: true }).filter((e) => e.isDirectory())
+    : [];
+  for (const home of t3Homes) {
+    const configDir = path.join(t3Root, home.name, 'config');
+    installPlugin(path.join(configDir, 'plugins', 'kstack'));
+
+    const configPath = path.join(configDir, 'config.json');
+    const config = fs.existsSync(configPath) ? JSON.parse(fs.readFileSync(configPath, 'utf8')) : {};
+    config.plugins = { ...config.plugins, kstack: { enabled: true } };
+    fs.writeFileSync(configPath, JSON.stringify(config, null, 2) + '\n');
+
+    const t3Models = path.join(configDir, 'kstack-models.md');
+    if (!fs.existsSync(t3Models)) fs.copyFileSync(modelsDest, t3Models);
+  }
+}
