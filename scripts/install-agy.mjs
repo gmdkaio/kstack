@@ -115,7 +115,7 @@ if (!process.argv[2]) {
 
   // 6. T3 Code runs its own Antigravity with a separate home per install. It copies
   // ~/.gemini/GEMINI.md there but not plugins, and has no Customizations page, so
-  // install, enable, and copy the models sheet into each home directly.
+  // install and enable kstack in each home directly.
   const t3Root = path.join(os.homedir(), '.t3', 'userdata', 'providers', 'antigravity');
   const t3Homes = fs.existsSync(t3Root)
     ? fs.readdirSync(t3Root, { withFileTypes: true }).filter((e) => e.isDirectory())
@@ -128,8 +128,5 @@ if (!process.argv[2]) {
     const config = fs.existsSync(configPath) ? JSON.parse(fs.readFileSync(configPath, 'utf8')) : {};
     config.plugins = { ...config.plugins, kstack: { enabled: true } };
     fs.writeFileSync(configPath, JSON.stringify(config, null, 2) + '\n');
-
-    const t3Models = path.join(configDir, 'kstack-models.md');
-    if (!fs.existsSync(t3Models)) fs.copyFileSync(modelsDest, t3Models);
   }
 }

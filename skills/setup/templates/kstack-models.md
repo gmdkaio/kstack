@@ -5,11 +5,13 @@ one line per role: `role: model @effort`. models are haiku, sonnet, opus. effort
 explorer: haiku @medium
 builder: sonnet @medium
 reviewer: opus @medium
+t3-reviewer: gemini-4-neon @high
 writer: sonnet @low
 
 # notes
 # - builder: use high for a harder or longer piece.
 # - reviewer: keep opus. its value is the reasoning in its feedback. use high for a new feature or a shared signature change. avoid max.
+# - t3-reviewer: the reviewer when T3 Code sends it to Antigravity. a model id from orchestrator_capabilities.
 # - avoid xhigh and max on builder and explorer. sonnet at max starts its own review rounds.
 # - haiku at low skips searches and checks in long prompts.
 # - CLAUDE_CODE_EFFORT_LEVEL in the environment overrides every effort here.
