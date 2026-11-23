@@ -1,7 +1,7 @@
 {
   "name": "kstack",
-  "version": "0.1.14",
-  "description": "A small workflow stack: an entry skill that routes each task, shaping, blindspots, browser verification, a reviewer, commit and close-out, and a few principles.",
+  "version": "0.1.15",
+  "description": "A small workflow stack. An entry skill routes each task, and other skills handle review, commit and close-out.",
   "author": {
     "name": "kaio",
     "url": "https://github.com/gmdkaio"
