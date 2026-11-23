@@ -1,13 +1,20 @@
 {
   "name": "kstack",
-  "version": "0.1.13",
-  "description": "A small workflow stack for Claude Code: one entry skill, commit, close-out, setup and a few principles.",
+  "version": "0.1.14",
+  "description": "A small workflow stack: an entry skill that routes each task, shaping, blindspots, browser verification, a reviewer, commit and close-out, and a few principles.",
   "author": {
     "name": "kaio",
     "url": "https://github.com/gmdkaio"
   },
   "repository": "https://github.com/gmdkaio/kstack",
-  "keywords": ["workflow", "skills", "commit", "handoff"],
+  "keywords": [
+    "workflow",
+    "skills",
+    "commit",
+    "handoff",
+    "code-review",
+    "antigravity"
+  ],
   "skills": [
     "./skills/brain",
     "./skills/commit",

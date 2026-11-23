@@ -45,7 +45,7 @@ then the report goes back to the builder to work on. a fresh builder with the re
 when T3 Code's `delegate_task` tool is available, the reviewer can run on the other provider. a model from another family tends to catch mistakes the builder's family misses. use it whenever a review is due.
 - from Claude Code, send it to Antigravity. from Antigravity, send it to Claude.
 - call `orchestrator_capabilities` first. it gives the exact provider ids, model ids and option names.
-- the model comes from the `t3-reviewer: model @level` line in the host's models sheet. pass the level as that model's option (`effort` on Claude, `thought_level` on Antigravity). no line: pick the other family's top reasoning model from the list, at high. a pinned model missing from the list: tell the user to update the sheet, and don't pick another.
+- the model comes from the `t3-reviewer: model @level` line in the host's models sheet. pass the level as that model's option (`effort` on Claude, `thought_level` on Antigravity). no line: pick the other family's top reasoning model from the list, at high. the default list is short, so search it for a pinned model before calling it missing. still missing: tell the user to update the sheet, and don't pick another.
 - the child is a plain agent, not the reviewer agent, so the brief carries the instructions: review this diff against this claim, give feedback with reasoning plus any bug or excess you can reproduce, apply no fixes.
 - explorer, builder and writer stay on the host's own subagents.
 - the rules above still hold, and you still rerun every finding.

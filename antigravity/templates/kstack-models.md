@@ -1,8 +1,8 @@
 # kstack models (Antigravity)
 
-One line per role: `role: model`, except `t3-reviewer` (see notes).
+One line per role: `role: model`.
 Valid Antigravity `invoke_subagent` tiers are `inherit`, `flash_lite`, `flash`, and `pro` (Antigravity does not take a separate effort parameter).
-Missing file or missing line: use `inherit`.
+Missing file or missing line: use `inherit`. `t3-reviewer` follows its own rules, see the notes.
 
 explorer: flash
 builder: inherit

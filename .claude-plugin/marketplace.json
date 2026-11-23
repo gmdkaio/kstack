@@ -3,11 +3,14 @@
   "owner": {
     "name": "kaio"
   },
+  "metadata": {
+    "description": "kstack, a small workflow plugin for Claude Code."
+  },
   "plugins": [
     {
       "name": "kstack",
       "source": "./",
-      "description": "A small workflow stack for Claude Code: one entry skill, commit, close-out, setup and a few principles."
+      "description": "A small workflow stack: an entry skill that routes each task, shaping, blindspots, browser verification, a reviewer, commit and close-out, and a few principles."
     }
   ]
 }
