@@ -10,21 +10,21 @@ delegate when pieces are independent, when the work would flood your context, or
 
 ## roles
 
-- **explorer**: read only, answers "how does this work". use the built-in `Explore` agent.
-- **builder**: implements one bounded piece. use `general-purpose` with a brief.
-- **reviewer**: `kstack:reviewer`, a fresh agent. see below.
-- **writer**: handoff and docs. `general-purpose` with a brief.
+- **explorer**: read only, answers "how does this work". Claude Code: built-in `Explore`. Antigravity: built-in `research`.
+- **builder**: implements one bounded piece. Claude Code: `general-purpose` with a brief. Antigravity: `self` with a brief (`Workspace: "share"` for parallel edits).
+- **reviewer**: Claude Code: `kstack:reviewer`. Antigravity: `reviewer`. a fresh agent. see below.
+- **writer**: handoff and docs. Claude Code: `general-purpose`. Antigravity: `self`.
 
 ## the reviewer
 
 it reviews the final work of a commit, once, and only when needed: a new feature, a change to a shared signature, or when the user asks. a small fix that passes its checks does not get one.
 
-give it the diff and the claim the change makes, not the builder's reasoning. it reports and applies no fixes. its value is the reasoning in its feedback more than a bug count, so it runs on opus. you rerun every finding:
+give it the diff and the claim the change makes, not the builder's reasoning. it reports and applies no fixes. its value is the reasoning in its feedback more than a bug count, so it runs on the top reasoning model (`opus` in Claude Code, `pro` in Antigravity). you rerun every finding:
 - a bug counts only if its reproduction fails.
 - an excess finding counts only if deleting the thing leaves the checks passing.
 - feedback has no command. weigh the reasoning.
 
-then the report goes back to the builder to work on. a fresh builder with the report in its brief, or `SendMessage` to the original if it is still alive. the builder takes each point or declines it with a reason, reruns the checks, and reports what changed. one round. a second only when a bug was real.
+then the report goes back to the builder to work on. a fresh builder with the report in its brief, or message the original (`SendMessage` in Claude Code, `send_message` in Antigravity) if it is still alive. the builder takes each point or declines it with a reason, reruns the checks, and reports what changed. one round. a second only when a bug was real.
 
 ## rules for every spawn
 
@@ -37,12 +37,17 @@ then the report goes back to the builder to work on. a fresh builder with the re
 
 ## models
 
-the sheet at `~/.claude/kstack-models.md` has one line per role, `role: model @effort`. when you spawn, read it and pass `model` and `effort` on the call. the agent files carry no model. no sheet or no line for the role, use the session model. `setup` offers the template if the sheet is missing.
+- **Claude Code:** the sheet at `~/.claude/kstack-models.md` has one line per role, `role: model @effort`. when you spawn, read it and pass `model` and `effort` on the call. the agent files carry no model. no sheet or no line for the role, use the session model.
+- **Antigravity:** the sheet at `~/.gemini/config/kstack-models.md` has one line per role, `role: model` (`inherit`, `flash_lite`, `flash`, or `pro`; Antigravity has no effort parameter). pass `Model` on `invoke_subagent`. no sheet or no line for the role, use `inherit`.
 
 ## escalation
 
-a role goes up one step (higher effort on the same model, then the next model) when its check fails twice, or when the reviewer finds something the builder can't fix in one retry. the ladder is haiku, sonnet, opus. fable is never on it unless the user asks for it. one escalation per task. if it still fails, stop and ask the user.
+a role goes up one step when its check fails twice, or when the reviewer finds something the builder can't fix in one retry.
+- **Claude Code:** higher effort on the same model, then the next model on the ladder `haiku -> sonnet -> opus` (fable is never on it unless the user asks).
+- **Antigravity:** next tier on the ladder `flash_lite -> flash -> pro` (or `inherit -> pro`).
+
+one escalation per task. if it still fails, stop and ask the user.
 
 ## a judgment call
 
-rare. use it only when two reasonable options remain after the evidence is in, such as a design tradeoff where two reviewers disagree. name the agents so they can message each other with `SendMessage`, state the question and the options in each brief, and cap it at two rounds. then read the exchange and decide yourself. agreement between agents is evidence, not authority. record a decision that matters in `decisoes/`.
+rare. use it only when two reasonable options remain after the evidence is in, such as a design tradeoff where two reviewers disagree. let the agents exchange one or two rounds (`SendMessage` in Claude Code, `send_message` in Antigravity), state the question and the options in each brief, and cap it at two rounds. then read the exchange and decide yourself. agreement between agents is evidence, not authority. record a decision that matters in `decisoes/`.

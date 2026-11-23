@@ -20,4 +20,4 @@ the user knows what they asked. this finds what they didn't know to ask.
 rules:
 - raise gaps, don't build them. the user decides what enters the scope.
 - no padding. ten sharp items beat thirty generic ones. if the scope is sound, say so.
-- follow `kstack:principle-honest`. if the plan has a real flaw, it goes first.
+- follow `principle-honest`. if the plan has a real flaw, it goes first.

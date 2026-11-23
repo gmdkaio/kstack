@@ -7,10 +7,10 @@ description: Entry point for real work. Use when a task touches more than one fi
 
 pick the shape of the task, do it small, prove it, close it.
 
-1. restate the goal in one line. read the project `CLAUDE.md` and the `handoff.md` it points to (the `docs:` line says where).
+1. restate the goal in one line. read the project instructions (`AGENTS.md`, `GEMINI.md`, or `CLAUDE.md`) and the `handoff.md` they point to (the `docs:` line says where).
 2. pick the shape, then read its playbook from this skill's `playbooks/` folder: `new-project.md` (an idea with no design yet, or an empty repo), `feature.md`, `bug.md` or `investigation.md`. follow its steps in order. a step you skip is said as skipped, with the reason.
-   - **project override.** if `<docs>/playbooks/<shape>.md` exists (`docs:` from the project `CLAUDE.md`), read it too. each line is `after "<base step, quoted exactly>": <what to do>` or `before "<base step>": <what to do>`. do that at that point. a quote that matches no base step is a broken override: say so and carry on with the base steps.
-3. a task with several independent pieces, or one that needs a fresh pair of eyes, is delegated. follow `kstack:principle-delegate`.
-4. before saying done, follow `kstack:principle-prove-it`. then run `kstack:close`.
+   - **project override.** if `<docs>/playbooks/<shape>.md` exists (`docs:` from the project instructions), read it too. each line is `after "<base step, quoted exactly>": <what to do>` or `before "<base step>": <what to do>`. do that at that point. a quote that matches no base step is a broken override: say so and carry on with the base steps.
+3. a task with several independent pieces, or one that needs a fresh pair of eyes, is delegated. follow `principle-delegate`.
+4. before saying done, follow `principle-prove-it`. then run `close`.
 
-the user's `CLAUDE.md` wins over anything here. no is an acceptable answer to a request that doesn't hold up.
+the project's `AGENTS.md` / `GEMINI.md` / `CLAUDE.md` wins over anything here. no is an acceptable answer to a request that doesn't hold up.

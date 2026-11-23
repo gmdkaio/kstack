@@ -18,4 +18,4 @@ do what was asked, verified, and nothing around it. every line traces to the req
 - no CI, linters or tooling unless asked.
 - before finishing, list what was added beyond the request and delete what isn't needed.
 
-a project can sharpen any of these in its own `CLAUDE.md`.
+a project can sharpen any of these in its own `AGENTS.md`, `GEMINI.md`, or `CLAUDE.md`.

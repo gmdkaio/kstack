@@ -11,7 +11,7 @@ skip it when the request is complete (everything that changes what gets built is
 
 ## 1. look first
 
-read what exists before the first message: files the user pointed at, notes or specs they pasted, and whatever is in the folder. a new project usually has no `CLAUDE.md`, no handoff and no docs, often an empty folder or no git repo. that is normal: say it is a blank start in one line and go on. don't hunt for docs or ask about them. if a `CLAUDE.md`, `handoff.md` or repo does exist, read it. never ask what these already answer, and never reopen what is decided.
+read what exists before the first message: files the user pointed at, notes or specs they pasted, and whatever is in the folder. a new project usually has no `AGENTS.md` or `CLAUDE.md`, no handoff and no docs, often an empty folder or no git repo. that is normal: say it is a blank start in one line and go on. don't hunt for docs or ask about them. if an `AGENTS.md`, `GEMINI.md`, `CLAUDE.md`, `handoff.md` or repo does exist, read it. never ask what these already answer, and never reopen what is decided.
 
 ## 2. why first
 
@@ -44,7 +44,7 @@ ground to cover, as territory and not a script:
 
 **stack.** read from how they talk whether they want to choose. if they raise it or ask about trade-offs, lay out two or three real options in a message of their own, with what each costs, and recommend one. if they talk outcomes, make the call and state it in a line, as your call and not as something they agreed to. an existing project keeps its stack.
 
-**honest.** if the idea has a real flaw (it exists already, the scope is two projects, the stack fights the goal), say so in the round it shows up, before the questions (`kstack:principle-honest`). if it is several independent projects, say so, agree an order, shape the first.
+**honest.** if the idea has a real flaw (it exists already, the scope is two projects, the stack fights the goal), say so in the round it shows up, before the questions (`principle-honest`). if it is several independent projects, say so, agree an order, shape the first.
 
 **spike.** when a throwaway build would answer a question faster than talking, offer one. it is labeled throwaway, gets no tests, and keeping it is a new request that comes back through step 6.
 
@@ -54,7 +54,7 @@ when a part is clear (what it is for, how one piece behaves), describe it in a s
 
 ## 5. the design doc
 
-when the frontier is empty, write `design.md`. where: the `docs:` path from the project `CLAUDE.md` if there is one, otherwise `docs/design.md` in the current folder (create the folder), or wherever the user names. don't run `git init` or add any other file yet. one page, plain, so a builder could start from it without asking again:
+when the frontier is empty, write `design.md`. where: the `docs:` path from the project instructions (`AGENTS.md`, `GEMINI.md`, or `CLAUDE.md`) if there is one, otherwise `docs/design.md` in the current folder (create the folder), or wherever the user names. don't run `git init` or add any other file yet. one page, plain, so a builder could start from it without asking again:
 
 - **idea and why:** two or three lines, in their terms
 - **goals, non-goals, anti-goals**
@@ -64,7 +64,7 @@ when the frontier is empty, write `design.md`. where: the `docs:` path from the 
 - **plan:** the build order as a short numbered list, each step something that can be checked
 - **open:** what is left unknown and the cheapest check that would settle it
 
-say which items are your calls so they can check those while reading. no filler (`kstack:principle-prose`).
+say which items are your calls so they can check those while reading. no filler (`principle-prose`).
 
 ## 6. the gate
 
@@ -72,11 +72,11 @@ nothing is built until the user approves `design.md`. building means product cod
 
 - a change they ask for goes into the doc first, then back for approval.
 - if they opt out ("just build it"): say in one line the stack call you are making, then go on through the `feature` playbook. this skill is done.
-- once approved, run `kstack:setup` if the project has no `## kstack` section (the usual case here). `design.md` stays where it is and setup builds the rest of the docs skeleton around it. then follow the `feature` playbook from its branch step, with the first version as the scope and the plan as the build order. steps 1 to 3 are done.
+- once approved, run `setup` if the project has no `## kstack` section (the usual case here). `design.md` stays where it is and setup builds the rest of the docs skeleton around it. then follow the `feature` playbook from its branch step, with the first version as the scope and the plan as the build order. steps 1 to 3 are done.
 
 ## rules
 
 - ask only what changes what gets built. a default you state is better than a question with an obvious answer.
 - plain language, pitched a little above where the user is. match their words.
 - do not read this skill out to the user.
-- the user's `CLAUDE.md` wins over anything here.
+- the project's `AGENTS.md` / `GEMINI.md` / `CLAUDE.md` wins over anything here.
