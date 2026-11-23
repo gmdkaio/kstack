@@ -41,7 +41,7 @@ add the lines from `templates/CLAUDE.md` to the end of the project instructions,
 ## 4. models
 
 - **Claude Code:** if `~/.claude/kstack-models.md` doesn't exist, offer to copy `templates/kstack-models.md` there. ask first and never overwrite it.
-- **Antigravity:** if `~/.gemini/config/kstack-models.md` doesn't exist, offer to create it with Antigravity model tiers (`explorer: flash`, `builder: inherit`, `reviewer: pro`, `writer: flash`). ask first and never overwrite it.
+- **Antigravity:** if `~/.gemini/config/kstack-models.md` doesn't exist, offer to create it with Antigravity model tiers (`explorer: flash`, `builder: inherit`, `reviewer: pro`, `writer: flash`, `t3-reviewer: claude-opus-5-5 @high`). ask first and never overwrite it.
 
 ## 5. report
 
