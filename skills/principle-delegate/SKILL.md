@@ -40,6 +40,15 @@ then the report goes back to the builder to work on. a fresh builder with the re
 - **Claude Code:** the sheet at `~/.claude/kstack-models.md` has one line per role, `role: model @effort`. when you spawn, read it and pass `model` and `effort` on the call. the agent files carry no model. no sheet or no line for the role, use the session model.
 - **Antigravity:** the sheet at `~/.gemini/config/kstack-models.md` has one line per role, `role: model` (`inherit`, `flash_lite`, `flash`, or `pro`; Antigravity has no effort parameter). pass `Model` on `invoke_subagent`. no sheet or no line for the role, use `inherit`.
 
+## T3 Code
+
+when T3 Code's `delegate_task` tool is available, the reviewer can run on the other provider. a model from another family tends to catch mistakes the builder's family misses. use it whenever a review is due.
+- from Claude Code, send it to Antigravity. from Antigravity, send it to Claude on opus.
+- call `orchestrator_capabilities` first and pick that provider's top reasoning model from its list, at high. the tiers in the models sheet do not map onto those names.
+- the child is a plain agent, not the reviewer agent, so the brief carries the instructions: review this diff against this claim, give feedback with reasoning plus any bug or excess you can reproduce, apply no fixes.
+- explorer, builder and writer stay on the host's own subagents.
+- the rules above still hold, and you still rerun every finding.
+
 ## escalation
 
 a role goes up one step when its check fails twice, or when the reviewer finds something the builder can't fix in one retry.
