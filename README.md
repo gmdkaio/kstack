@@ -29,8 +29,6 @@ node scripts/install-agy.mjs
 
 Installs `kstack` globally in `~/.gemini/config/plugins/kstack/` so its rules, skills and reviewer apply across every project. Turn it on or off from the Customizations page. Rerun the script after pulling changes.
 
-T3 Code runs its own copy of Antigravity, which does not read `~/.gemini/config/plugins/`. The script also installs and enables `kstack` there when it finds T3. A T3 update can create a new copy, so rerun the script after updating T3.
-
 If a repo uses both tools, keep the `## kstack` block in `AGENTS.md` and put `@AGENTS.md` in `CLAUDE.md` so you only maintain one file.
 
 ## Using it

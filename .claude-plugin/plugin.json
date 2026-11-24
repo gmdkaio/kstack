@@ -1,6 +1,6 @@
 {
   "name": "kstack",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "description": "A small workflow stack. An entry skill routes each task, and other skills handle review, commit and close-out.",
   "author": {
     "name": "kaio",
